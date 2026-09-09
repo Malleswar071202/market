@@ -172,7 +172,7 @@ function generateFormattedText() {
   // Sadguru Dall Mills Rate Builder Template
   const rawDate = document.getElementById('millDate').value;
   const subtitle = document.getElementById('millSubtitle').value || 'TODAY MARKET RATES';
-  const footerNote = document.getElementById('millFooter').value || 'Sadguru Dall Mills';
+  const footerNote = document.getElementById('millFooter').value || '9247484969';
 
   let formattedDate = '';
   if (rawDate) {
@@ -186,20 +186,18 @@ function generateFormattedText() {
   text += `Date: *${formattedDate}*\n`;
   text += `*${subtitle.toUpperCase()}*\n\n`;
 
-  // Monospace Table for WhatsApp (WhatsApp renders ``` blocks with fixed-width font like Excel)
-  text += `\`\`\`\n`;
-  text += padRight('BRAND', 13) + padRight('GULLU', 7) + padRight('PAPPU', 7) + `\n`;
-  text += `-----------------------------\n`;
+  text += `*BRAND* | *GULLU* | *PAPPU*\n`;
+  text += `---------------------------------\n`;
 
   rateItems.forEach(item => {
     const brandName = item.brand.trim() || 'Brand Item';
     const gulluVal = item.gullu.trim() ? item.gullu.trim() : '-';
     const pappuVal = item.pappu.trim() ? item.pappu.trim() : '-';
 
-    text += padRight(brandName, 13) + padRight(gulluVal, 7) + padRight(pappuVal, 7) + `\n`;
+    text += `*${brandName}* : ${gulluVal} | ${pappuVal}\n`;
   });
 
-  text += `\`\`\`\n`;
+  text += `---------------------------------\n`;
 
   if (footerNote.trim()) {
     text += `*Contact for Booking:* ${footerNote.trim()}`;
