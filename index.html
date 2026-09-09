@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SADGURU DALL MILLS - WhatsApp Message & Rate List Generator</title>
+  <meta name="description" content="Generate instant WhatsApp daily rate lists, formatted tabular price messages, direct WhatsApp links, and QR codes for SADGURU DALL MILLS.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-badge">
+        <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+        <span>SADGURU DALL MILLS RATE GENERATOR</span>
+      </div>
+      <h1>WhatsApp Message & Rate List Builder</h1>
+      <p>Create professional daily pulse/dall rates, instant WhatsApp links, custom formatted messages, and QR codes.</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- Left Column: Generator Form Controls -->
+    <section class="editor-section">
+
+      <!-- Navigation Tabs -->
+      <div class="tab-navigation">
+        <button class="tab-btn active" id="tabRateBuilder" onclick="switchTab('rateBuilder')">
+          <i class="fa-solid fa-wheat-awn"></i> Sadguru Dall Mills Rates
+        </button>
+        <button class="tab-btn" id="tabCustomMsg" onclick="switchTab('customMsg')">
+          <i class="fa-solid fa-pen-to-square"></i> General Message
+        </button>
+        <button class="tab-btn" id="tabTemplates" onclick="switchTab('templates')">
+          <i class="fa-solid fa-book-bookmark"></i> Quick Templates
+        </button>
+      </div>
+
+      <!-- Tab 1: Sadguru Dall Mills Rate Builder -->
+      <div class="tab-content active" id="rateBuilderContent">
+        <div class="card glass-card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-store"></i> Sadguru Dall Mills Rate Matrix</h2>
+            <button class="btn btn-sm btn-secondary" onclick="loadSampleRates()">
+              <i class="fa-solid fa-arrows-rotate"></i> Reset Sample Data
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="millDate"><i class="fa-regular fa-calendar-days"></i> Rate Date & Header Subtitle</label>
+            <div class="input-row">
+              <input type="date" id="millDate" class="form-input">
+              <input type="text" id="millSubtitle" class="form-input" placeholder="e.g. Today Market Rates / Special Price">
+            </div>
+          </div>
+
+          <div class="table-editor-container">
+            <div class="table-header-labels">
+              <span class="col-lbl col-brand"><i class="fa-solid fa-box"></i> Brand / Item Name</span>
+              <span class="col-lbl col-gullu"><i class="fa-solid fa-circle text-gullu"></i> Gullu Rate (₹)</span>
+              <span class="col-lbl col-pappu"><i class="fa-solid fa-circle text-pappu"></i> Pappu Rate (₹)</span>
+              <span class="col-lbl col-action">Action</span>
+            </div>
+            
+            <div id="rateRowsContainer" class="rate-rows-list">
+              <!-- Dynamic Rows inserted via JS -->
+            </div>
+
+            <button class="btn btn-add-row" onclick="addRateRow()">
+              <i class="fa-solid fa-plus"></i> Add Brand Item
+            </button>
+          </div>
+
+          <div class="form-group margin-top-md">
+            <label for="millFooter"><i class="fa-solid fa-comment-dots"></i> Footer Note / Contact Terms</label>
+            <input type="text" id="millFooter" class="form-input" placeholder="e.g. All rates are GST extra. Contact: 9876543210 for booking.">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: General Custom Message -->
+      <div class="tab-content" id="customMsgContent">
+        <div class="card glass-card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-message"></i> Custom WhatsApp Message</h2>
+          </div>
+          
+          <div class="toolbar">
+            <button class="tool-btn" onclick="applyFormat('bold')" title="Bold"><i class="fa-solid fa-bold"></i></button>
+            <button class="tool-btn" onclick="applyFormat('italic')" title="Italic"><i class="fa-solid fa-italic"></i></button>
+            <button class="tool-btn" onclick="applyFormat('strike')" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+            <button class="tool-btn" onclick="applyFormat('code')" title="Monospace Code"><i class="fa-solid fa-code"></i></button>
+            <div class="toolbar-divider"></div>
+            <button class="tool-btn" onclick="insertEmoji('🔥')">🔥</button>
+            <button class="tool-btn" onclick="insertEmoji('✅')">✅</button>
+            <button class="tool-btn" onclick="insertEmoji('🏷️')">🏷️</button>
+            <button class="tool-btn" onclick="insertEmoji('📢')">📢</button>
+            <button class="tool-btn" onclick="insertEmoji('🌾')">🌾</button>
+          </div>
+
+          <textarea id="customMessageInput" class="form-textarea" rows="8" placeholder="Type your custom WhatsApp message here..."></textarea>
+        </div>
+      </div>
+
+      <!-- Tab 3: Presets & Templates -->
+      <div class="tab-content" id="templatesContent">
+        <div class="card glass-card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-list-check"></i> Ready-to-Use Templates</h2>
+          </div>
+          <div class="templates-grid">
+            <div class="template-card" onclick="applyPreset('dallFull')">
+              <h3><i class="fa-solid fa-wheat-awn text-whatsapp"></i> Full Dall Mill Rate Card</h3>
+              <p>Header, 4 Brands with Gullu & Pappu rates, booking instructions.</p>
+            </div>
+            <div class="template-card" onclick="applyPreset('orderConfirm')">
+              <h3><i class="fa-solid fa-receipt text-whatsapp"></i> Order Booking Confirmation</h3>
+              <p>Formal confirmation message for pulse booking and payment details.</p>
+            </div>
+            <div class="template-card" onclick="applyPreset('discountPromo')">
+              <h3><i class="fa-solid fa-percent text-whatsapp"></i> Discount Special Offer</h3>
+              <p>Limited period price reduction alert for wholesale buyers.</p>
+            </div>
+            <div class="template-card" onclick="applyPreset('paymentReminder')">
+              <h3><i class="fa-solid fa-indian-rupee-sign text-whatsapp"></i> Payment Reminder</h3>
+              <p>Polite payment reminder template for pending invoices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Phone Number & Configuration -->
+      <div class="card glass-card margin-top-md">
+        <div class="card-header">
+          <h2><i class="fa-solid fa-phone"></i> Target Recipient & Direct Link Setup</h2>
+        </div>
+        <div class="phone-input-group">
+          <div class="country-code-wrap">
+            <span class="country-flag">🇮🇳</span>
+            <select id="countryCode" class="form-select">
+              <option value="91">+91 (India)</option>
+              <option value="1">+1 (USA/Canada)</option>
+              <option value="44">+44 (UK)</option>
+              <option value="971">+971 (UAE)</option>
+              <option value="966">+966 (Saudi Arabia)</option>
+            </select>
+          </div>
+          <input type="tel" id="phoneNumber" class="form-input" placeholder="Recipient Phone Number (Optional for general share link)">
+        </div>
+        <p class="field-help"><i class="fa-solid fa-circle-info"></i> Leave empty if you want a general link that can be shared with anyone or in group chats.</p>
+      </div>
+
+    </section>
+
+    <!-- Right Column: Live Chat Preview & Output Actions -->
+    <section class="preview-section">
+      
+      <!-- Live WhatsApp Chat Simulator -->
+      <div class="chat-preview-card">
+        <div class="whatsapp-header">
+          <div class="wa-user-info">
+            <div class="wa-avatar">
+              <i class="fa-solid fa-industry"></i>
+            </div>
+            <div class="wa-details">
+              <span class="wa-name">SADGURU DALL MILLS</span>
+              <span class="wa-status">Online</span>
+            </div>
+          </div>
+          <div class="wa-actions">
+            <i class="fa-solid fa-video"></i>
+            <i class="fa-solid fa-phone"></i>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+        </div>
+
+        <div class="whatsapp-body">
+          <div class="chat-date-badge">TODAY</div>
+          
+          <div class="chat-bubble-container">
+            <div class="chat-bubble">
+              <div id="formattedPreviewText" class="chat-message-content">
+                <!-- Live text populated here -->
+              </div>
+              <div class="chat-meta">
+                <span id="chatTime">12:00 PM</span>
+                <i class="fa-solid fa-check-double read-ticks"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Panel & Links -->
+      <div class="card glass-card margin-top-md">
+        <div class="card-header">
+          <h2><i class="fa-solid fa-bolt"></i> Output Actions & Sharing</h2>
+        </div>
+
+        <div class="action-buttons-grid">
+          <button class="btn btn-whatsapp btn-lg" onclick="openWhatsApp()">
+            <i class="fa-brands fa-whatsapp"></i> Open in WhatsApp
+          </button>
+          <button class="btn btn-primary" onclick="copyFormattedText()">
+            <i class="fa-solid fa-copy"></i> Copy Message Text
+          </button>
+          <button class="btn btn-secondary" onclick="copyWhatsAppLink()">
+            <i class="fa-solid fa-link"></i> Copy WhatsApp Link
+          </button>
+          <button class="btn btn-outline" onclick="showQrModal()">
+            <i class="fa-solid fa-qrcode"></i> Generate QR Code
+          </button>
+        </div>
+
+        <div class="form-group margin-top-md">
+          <label><i class="fa-solid fa-globe"></i> Generated WhatsApp Direct Link</label>
+          <div class="input-with-copy">
+            <input type="text" id="generatedLinkInput" class="form-input" readonly value="https://wa.me/">
+            <button class="btn btn-sm btn-secondary" onclick="copyWhatsAppLink()">Copy</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- QR Code Modal -->
+  <div id="qrModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-qrcode"></i> WhatsApp Message QR Code</h3>
+        <button class="close-modal" onclick="closeQrModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Scan this QR Code with any phone camera or WhatsApp scanner to open the pre-filled message instantly.</p>
+        <div id="qrcodeContainer" class="qrcode-wrapper"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="downloadQRCode()"><i class="fa-solid fa-download"></i> Download QR Image</button>
+        <button class="btn btn-outline" onclick="closeQrModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
