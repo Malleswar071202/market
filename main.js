@@ -187,9 +187,7 @@ function generateFormattedText() {
   text += `*${subtitle.toUpperCase()}*\n`;
   text += `Date: *${formattedDate}*\n\n`;
 
-  // Monospace Table for WhatsApp alignment (like Excel grid)
-  text += `\`\`\`\n`;
-  text += padRight('BRAND', 15) + padRight('గుళ్ళు', 8) + padRight('పప్పు', 8) + `\n`;
+  text += `*BRAND* | *గుళ్ళు* | *పప్పు*\n`;
   text += `---------------------------------\n`;
 
   rateItems.forEach((item, index) => {
@@ -197,10 +195,14 @@ function generateFormattedText() {
     const gulluVal = item.gullu.trim() ? item.gullu.trim() : '-';
     const pappuVal = item.pappu.trim() ? item.pappu.trim() : '-';
 
-    text += padRight(brandName, 15) + padRight(gulluVal, 8) + padRight(pappuVal, 8) + `\n`;
+    // Format with fixed column widths using bullet/space alignment safe for mobile & PC
+    const brandCol = padRight(brandName, 14);
+    const gulluCol = padRight(gulluVal, 6);
+
+    text += `*${brandCol}* : ${gulluCol} | ${pappuVal}\n`;
   });
 
-  text += `\`\`\`\n`;
+  text += `---------------------------------\n`;
 
   if (footerNote.trim()) {
     text += `*Contact for Booking:* ${footerNote.trim()}`;
