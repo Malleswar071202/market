@@ -171,7 +171,7 @@ function generateFormattedText() {
 
   // Sadguru Dall Mills Rate Builder Template
   const rawDate = document.getElementById('millDate').value;
-  const subtitle = document.getElementById('millSubtitle').value || 'TODAY MARKET RATES';
+  const subtitle = document.getElementById('millSubtitle').value || 'TODAY MARKET';
   const footerNote = document.getElementById('millFooter').value || '9247484969';
 
   let formattedDate = '';
@@ -182,19 +182,20 @@ function generateFormattedText() {
     formattedDate = new Date().toLocaleDateString('en-IN');
   }
 
-  let text = `*SADGURU DALL MILLS*\n`;
-  text += `Date: *${formattedDate}*\n`;
-  text += `*${subtitle.toUpperCase()}*\n\n`;
+  let text = `*ఓం*\n\n`;
+  text += `*SADGURU DALL MILLS*\n`;
+  text += `*${subtitle.toUpperCase()}*\n`;
+  text += `Date: *${formattedDate}*\n\n`;
 
-  text += `*BRAND* | *GULLU* | *PAPPU*\n`;
+  text += `*BRAND* | *గుళ్ళు* | *పప్పు*\n`;
   text += `---------------------------------\n`;
 
-  rateItems.forEach(item => {
+  rateItems.forEach((item, index) => {
     const brandName = item.brand.trim() || 'Brand Item';
     const gulluVal = item.gullu.trim() ? item.gullu.trim() : '-';
     const pappuVal = item.pappu.trim() ? item.pappu.trim() : '-';
 
-    text += `*${brandName}* : ${gulluVal} | ${pappuVal}\n`;
+    text += `${index + 1}. *${brandName}* : ${gulluVal} | ${pappuVal}\n`;
   });
 
   text += `---------------------------------\n`;
