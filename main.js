@@ -187,18 +187,20 @@ function generateFormattedText() {
   text += `*${subtitle.toUpperCase()}*\n`;
   text += `Date: *${formattedDate}*\n\n`;
 
-  text += `*BRAND* | *గుళ్ళు* | *పప్పు*\n`;
+  // Monospace Table for WhatsApp alignment (like Excel grid)
+  text += `\`\`\`\n`;
+  text += padRight('BRAND', 15) + padRight('గుళ్ళు', 8) + padRight('పప్పు', 8) + `\n`;
   text += `---------------------------------\n`;
 
   rateItems.forEach((item, index) => {
-    const brandName = item.brand.trim() || 'Brand Item';
+    const brandName = `${index + 1}. ${item.brand.trim() || 'Brand'}`;
     const gulluVal = item.gullu.trim() ? item.gullu.trim() : '-';
     const pappuVal = item.pappu.trim() ? item.pappu.trim() : '-';
 
-    text += `${index + 1}. *${brandName}* : ${gulluVal} | ${pappuVal}\n`;
+    text += padRight(brandName, 15) + padRight(gulluVal, 8) + padRight(pappuVal, 8) + `\n`;
   });
 
-  text += `---------------------------------\n`;
+  text += `\`\`\`\n`;
 
   if (footerNote.trim()) {
     text += `*Contact for Booking:* ${footerNote.trim()}`;
